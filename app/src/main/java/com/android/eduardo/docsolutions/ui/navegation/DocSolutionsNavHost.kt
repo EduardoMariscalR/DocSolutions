@@ -5,9 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.android.eduardo.docsolutions.ui.screens.login.LogIn
 import com.android.eduardo.docsolutions.ui.screens.login.LogInDestination
 import com.android.eduardo.docsolutions.ui.screens.login.LogInScreen
+import com.android.eduardo.docsolutions.ui.screens.newuserscreen.NewUserScreen
 import com.android.eduardo.docsolutions.ui.screens.newuserscreen.NewUserScreenDestination
 import com.android.eduardo.docsolutions.ui.screens.userlistscreen.UserListScreen
 import com.android.eduardo.docsolutions.ui.screens.userlistscreen.UserListScreenDestination
@@ -24,16 +24,18 @@ fun  DocSolutionsNavHost(
     ){
         composable(route = LogInDestination.route ) {
             LogInScreen(
-                navigateToUserListScreen = { navController.navigate("${UserListScreenDestination.route}/${it}")}
+                navigateToUserListScreen = { navController.navigate(UserListScreenDestination.route)}
             )
         }
         composable(route= UserListScreenDestination.route) {
             UserListScreen(
-                navigateToNewUserScreen = { navController.navigate("${NewUserScreenDestination.route}/${it}")}
+                navigateToNewUserScreen = { navController.navigate(NewUserScreenDestination.route)}
             )
         }
         composable(route = NewUserScreenDestination.route){
-
+            NewUserScreen(
+                navigateToUserListScreen={navController.navigate(UserListScreenDestination.route)}
+            )
         }
 
     }

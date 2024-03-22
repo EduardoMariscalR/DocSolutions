@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.eduardo.docsolutions.DocSolutionsApplication
 import com.android.eduardo.docsolutions.ui.screens.login.LogInViewModel
+import com.android.eduardo.docsolutions.ui.screens.newuserscreen.NewUserViewModel
 import com.android.eduardo.docsolutions.ui.screens.userlistscreen.UserListViewModel
 
 object AppViewModelProvider {
@@ -18,6 +19,12 @@ object AppViewModelProvider {
         }
         initializer {
             UserListViewModel(
+                docSolutionsApplication().container.docSolutionsRepository,
+                docSolutionsApplication().userPreferencesRepository
+            )
+        }
+        initializer {
+            NewUserViewModel(
                 docSolutionsApplication().container.docSolutionsRepository,
                 docSolutionsApplication().userPreferencesRepository
             )

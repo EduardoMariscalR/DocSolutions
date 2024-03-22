@@ -42,7 +42,7 @@ fun LogInScreen(
     navigateToUserListScreen: (Int) -> Unit,
     viewModel: LogInViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
-    when(val logInUiState = viewModel.logInUiState){
+    when (val logInUiState = viewModel.logInUiState) {
         is LogInUiState.Init ->
             LogIn(viewModel = viewModel)
 
@@ -56,9 +56,6 @@ fun LogInScreen(
 }
 
 
-
-
-
 @Composable
 fun LogIn(
     modifier: Modifier = Modifier,
@@ -69,8 +66,12 @@ fun LogIn(
     var password by remember { mutableStateOf("") }
 
     val context = LocalContext.current
-    if (viewModel.logInUiState == LogInUiState.Error){
-        Toast.makeText(context,"Sus datos son incorrectos, verifique su información e intente nuevamente",Toast.LENGTH_SHORT).show()
+    if (viewModel.logInUiState == LogInUiState.Error) {
+        Toast.makeText(
+            context,
+            "Sus datos son incorrectos, verifique su información e intente nuevamente",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     Scaffold(
@@ -81,7 +82,8 @@ fun LogIn(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(it),
+                    .padding(it)
+                    .padding(horizontal = 8.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -100,14 +102,15 @@ fun LogIn(
                 ) {
                     Text(
                         text = "Usuario:",
-                        fontSize = 22.sp,
-
-                        )
+                        fontSize = 16.sp,
+                        modifier = Modifier.weight(1f)
+                    )
                     OutlinedTextField(
                         value = user,
                         onValueChange = {
                             user = it
-                        }
+                        },
+                        modifier = Modifier.weight(2.5f)
                     )
                 }
                 Spacer(modifier = Modifier.size(25.dp))
@@ -119,13 +122,15 @@ fun LogIn(
                 ) {
                     Text(
                         text = "Contraseña:",
-                        fontSize = 22.sp,
+                        fontSize = 16.sp,
+                        modifier = Modifier.weight(1f)
                     )
                     OutlinedTextField(
                         value = password,
                         onValueChange = {
                             password = it
-                        }
+                        },
+                        modifier = Modifier.weight(2.5f)
                     )
                 }
                 Spacer(modifier = Modifier.size(25.dp))
@@ -133,7 +138,7 @@ fun LogIn(
                 Button(
                     onClick = {
                         viewModel.logIn(user = user, password = password)
-                        Log.i("Eduardo","Se preciona el boton")
+                        Log.i("Eduardo", "Se preciona el boton")
                     }
                 ) {
                     Text(text = "OK")

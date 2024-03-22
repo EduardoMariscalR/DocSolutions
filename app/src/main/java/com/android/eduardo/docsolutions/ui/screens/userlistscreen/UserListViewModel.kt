@@ -44,7 +44,11 @@ class UserListViewModel(
                 try {
                     val response =
                         docSolutionsRepository.getUser(GetUsers(BodyGetUsers(name)), token)
-                    UserListUiState.Success(response)
+                    if (response.body.isEmpty()){
+                        UserListUiState.Error
+                    } else{
+                        UserListUiState.Success(response)
+                    }
                 } catch (e: HttpException) {
                     UserListUiState.Error
                 }
